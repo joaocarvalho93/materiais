@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3S Checkout - Golburger</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red-primary: #e9202e;
+  --red-dark: #8c0019;
+  --white: #ffffff;
+  --black: #000000;
+  --green-highlight: #2b991d;
+  --purple-accent: #741b47;
+  --cream-bg: #fcf7f1;
+  --gray-border: #595959;
+  --green-light-bg: #d9ead3;
+  --gray-text: #666666;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.slide-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+}
+
+.slide.active {
+  display: flex;
+}
+
+/* ========== SLIDE 1 - CAPA ========== */
+.slide-cover {
+  background: var(--red-primary);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.slide-cover .nav-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 16px 28px;
+  gap: 10px;
+}
+
+.slide-cover .nav-bar .nav-item {
+  background: rgba(0,0,0,0.25);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.slide-cover .nav-bar .nav-item:hover {
+  background: rgba(0,0,0,0.45);
+}
+
+.slide-cover .cover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.slide-cover .cover-content .partner-logo {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  margin-bottom: 4px;
+}
+
+.slide-cover .cover-content h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.slide-cover .cover-content .divider {
+  width: 500px;
+  max-width: 80%;
+  height: 3px;
+  background: var(--black);
+  opacity: 0.2;
+}
+
+.slide-cover .cover-content .subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  opacity: 0.9;
+}
+
+.logo-3s {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--white);
+  background: rgba(0,0,0,0.25);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* ========== SLIDE 2 - TITULO SECAO ========== */
+.slide-section {
+  background: var(--red-dark);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.slide-section h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.slide-section .section-sub {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--white);
+  opacity: 0.8;
+  margin-top: 8px;
+}
+
+/* ========== SLIDES DE CONTEUDO ========== */
+.slide-content {
+  background: var(--red-primary);
+  padding: 0;
+}
+
+.slide-content .slide-header {
+  background: transparent;
+  padding: 20px 32px 12px;
+}
+
+.slide-content .slide-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.slide-content .slide-body {
+  flex: 1;
+  padding: 0 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Cards grid */
+.cards-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.cards-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.cards-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cards-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: rgba(0,0,0,0.18);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--white);
+}
+
+.card .card-icon {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.card h3 {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.card p {
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 1.45;
+  opacity: 0.9;
+}
+
+/* Table slide */
+.table-container {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.table-container thead th {
+  background: var(--red-dark);
+  color: var(--white);
+  font-weight: 700;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 10px;
+}
+
+.table-container tbody td {
+  padding: 8px 14px;
+  border-bottom: 1px solid #eee;
+  color: var(--black);
+  font-weight: 400;
+  font-size: 9.5px;
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+.table-container tbody tr:nth-child(even) {
+  background: var(--cream-bg);
+}
+
+.table-container tbody td:first-child {
+  font-weight: 600;
+  color: var(--black);
+}
+
+.table-container tbody td.green-text {
+  color: var(--green-highlight);
+  font-weight: 800;
+}
+
+/* Comparison slide */
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+
+.comparison-col {
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.comparison-col.current {
+  background: rgba(0,0,0,0.2);
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.comparison-col.new {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.35);
+}
+
+.comparison-col h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.comparison-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comparison-col li {
+  font-size: 9.5px;
+  color: var(--white);
+  padding: 5px 0;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.comparison-col li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.comparison-col.current li::before {
+  background: rgba(255,255,255,0.4);
+}
+
+.comparison-col.new li::before {
+  background: var(--green-highlight);
+}
+
+/* Data/KPI slide */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+
+.kpi-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 16px;
+  border-left: 4px solid var(--white);
+}
+
+.kpi-box h4 {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--white);
+  opacity: 0.8;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-box .kpi-desc {
+  font-size: 9.5px;
+  color: var(--white);
+  line-height: 1.45;
+}
+
+/* Direcionamento slide */
+.direcionamento-box {
+  background: var(--cream-bg);
+  border-radius: 8px;
+  padding: 20px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.direcionamento-box h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red-dark);
+}
+
+.direcionamento-box p {
+  font-size: 10px;
+  color: var(--black);
+  line-height: 1.55;
+}
+
+.direcionamento-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.direcionamento-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.direcionamento-item .num {
+  background: var(--red-primary);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 11px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.direcionamento-item p {
+  font-size: 9.5px;
+  color: var(--black);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Proposta slide */
+.proposta-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+
+.proposta-left {
+  background: var(--white);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid var(--gray-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.proposta-left h4 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 10px;
+}
+
+.proposta-left table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.proposta-left table td {
+  padding: 5px 8px;
+  font-size: 9.5px;
+  color: var(--black);
+  border-bottom: 1px solid #eee;
+}
+
+.proposta-left table td:first-child {
+  font-weight: 600;
+  width: 60%;
+}
+
+.proposta-left table td:last-child {
+  text-align: right;
+  font-weight: 500;
+}
+
+.proposta-left .total-row td {
+  border-top: 2px solid var(--red-primary);
+  font-weight: 800 !important;
+  font-size: 11px !important;
+  color: var(--red-dark) !important;
+  padding-top: 8px;
+}
+
+.proposta-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.proposta-right .servicos-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 14px 16px;
+  flex: 1;
+}
+
+.proposta-right .servicos-box h4 {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.proposta-right .servicos-box li {
+  font-size: 9px;
+  color: var(--white);
+  padding: 2px 0;
+  line-height: 1.4;
+}
+
+.proposta-right .highlights-box {
+  background: var(--green-light-bg);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.proposta-right .highlights-box h4 {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green-highlight);
+  margin-bottom: 6px;
+}
+
+.proposta-right .highlights-box li {
+  font-size: 9px;
+  color: var(--black);
+  padding: 2px 0;
+  line-height: 1.4;
+}
+
+/* Footer */
+.slide-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  background: rgba(0,0,0,0.15);
+}
+
+.slide-footer .footer-left {
+  font-size: 8px;
+  color: var(--white);
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.slide-footer .footer-right {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.slide-footer .page-num {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--white);
+  background: rgba(0,0,0,0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Navigation controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 0 24px;
+}
+
+.controls button {
+  background: var(--red-primary);
+  border: none;
+  color: var(--white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.controls button:hover {
+  background: var(--red-dark);
+}
+
+.controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.controls .slide-counter {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+.badge-red { background: var(--red-dark); color: var(--white); }
+.badge-green { background: var(--green-highlight); color: var(--white); }
+
+/* Fullscreen */
+.fullscreen-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ccc;
+  font-size: 18px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.2s;
+}
+.fullscreen-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+/* Strikethrough price */
+.price-old {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: 8.5px;
+  margin-right: 4px;
+}
+
+.price-free {
+  color: var(--green-highlight);
+  font-weight: 800;
+}
+</style>
+</head>
+<body>
+
+<button class="fullscreen-btn" onclick="toggleFullscreen()" title="Tela cheia">&#x26F6;</button>
+
+<div class="slide-container" id="slideContainer">
+
+  <!-- SLIDE 1 - CAPA -->
+  <div class="slide slide-cover active" data-slide="1">
+    <div class="nav-bar">
+      <div class="nav-item" onclick="goToSlide(3)">Perfil</div>
+      <div class="nav-item" onclick="goToSlide(4)">Infraestrutura</div>
+      <div class="nav-item" onclick="goToSlide(5)">Cozinha</div>
+      <div class="nav-item" onclick="goToSlide(6)">Backoffice</div>
+      <div class="nav-item" onclick="goToSlide(7)">Dores</div>
+      <div class="nav-item" onclick="goToSlide(9)">KPIs</div>
+      <div class="nav-item" onclick="goToSlide(10)">Comparativo</div>
+      <div class="nav-item" onclick="goToSlide(12)">Proposta</div>
+    </div>
+    <div class="cover-content">
+      <div class="partner-logo">GOLBURGER</div>
+      <h1>A solu&ccedil;&atilde;o completa para sua opera&ccedil;&atilde;o!</h1>
+      <div class="divider"></div>
+      <div class="subtitle">Diagn&oacute;stico Operacional &amp; Proposta Comercial</div>
+    </div>
+    <div class="logo-3s">3S Checkout</div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Apresenta&ccedil;&atilde;o Comercial</div>
+      <div class="footer-right"><span class="page-num">1 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 - SECAO: 3S CHECKOUT -->
+  <div class="slide slide-section" data-slide="2">
+    <h1>3S Checkout</h1>
+    <div class="section-sub">Diagn&oacute;stico Operacional &mdash; Golburger</div>
+    <div class="logo-3s">3S Checkout</div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger</div>
+      <div class="footer-right"><span class="page-num">2 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 - PERFIL DA OPERACAO -->
+  <div class="slide slide-content" data-slide="3">
+    <div class="slide-header">
+      <h2>Perfil da Opera&ccedil;&atilde;o e Canais de Venda</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cards-grid cols-4">
+        <div class="card">
+          <div class="card-icon">&#127978;</div>
+          <h3>Estrutura da Rede</h3>
+          <p>Opera com <strong>1 loja ativa</strong> no momento.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#127869;</div>
+          <h3>Formato Principal</h3>
+          <p>Atendimento local no sal&atilde;o <strong>(Table Service)</strong>.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128666;</div>
+          <h3>Delivery</h3>
+          <p>Canal <strong>iFood</strong> integrado com log&iacute;stica <strong>iFood Full Service</strong>.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128683;</div>
+          <h3>Autoatendimento</h3>
+          <p>N&atilde;o utiliza totens ou terminais. N&atilde;o opera como multimarcas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Perfil da Opera&ccedil;&atilde;o</div>
+      <div class="footer-right"><span class="page-num">3 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4 - INFRAESTRUTURA TECNOLOGICA -->
+  <div class="slide slide-content" data-slide="4">
+    <div class="slide-header">
+      <h2>Infraestrutura Tecnol&oacute;gica e Frente de Loja (FOH)</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cards-grid cols-3">
+        <div class="card">
+          <div class="card-icon">&#128179;</div>
+          <h3>Meios de Pagamento</h3>
+          <p><strong>Smart POS</strong> integrado &agrave; adquirente <strong>GETNET</strong>.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128187;</div>
+          <h3>Sistemas em Uso</h3>
+          <p>Frente de loja e gest&atilde;o de card&aacute;pio via <strong>Takeat</strong>. Sem ERP centralizado ou BI dedicado.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128101;</div>
+          <h3>CRM e Fideliza&ccedil;&atilde;o</h3>
+          <p><strong>Inexistente.</strong> Sem ferramentas de CRM ou app pr&oacute;prio para fidelizar clientes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Infraestrutura FOH</div>
+      <div class="footer-right"><span class="page-num">4 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5 - COZINHA (BOH) -->
+  <div class="slide slide-content" data-slide="5">
+    <div class="slide-header">
+      <h2>Opera&ccedil;&atilde;o de Cozinha (BOH) e Fluxo de Produ&ccedil;&atilde;o</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cards-grid cols-3">
+        <div class="card">
+          <div class="card-icon">&#127859;</div>
+          <h3>Capacidade Instalada</h3>
+          <p>Cozinha de <strong>alta complexidade</strong> com <strong>7 esta&ccedil;&otilde;es de trabalho</strong> ativas.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128424;</div>
+          <h3>Equipamentos de Fluxo</h3>
+          <p><strong>6 impressoras t&eacute;rmicas</strong> e <strong>3 telas de KDS</strong> (Kitchen Display System).</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128203;</div>
+          <h3>Gest&atilde;o de Pedidos</h3>
+          <p>Modelo <strong>h&iacute;brido</strong>: telas digitais KDS + confer&ecirc;ncia de comandas f&iacute;sicas impressas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Opera&ccedil;&atilde;o BOH</div>
+      <div class="footer-right"><span class="page-num">5 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6 - BACKOFFICE -->
+  <div class="slide slide-content" data-slide="6">
+    <div class="slide-header">
+      <h2>Processos de Retaguarda e Backoffice</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cards-grid cols-4">
+        <div class="card">
+          <div class="card-icon">&#128230;</div>
+          <h3>Gest&atilde;o de Estoque</h3>
+          <p>Invent&aacute;rios com periodicidade <strong>estritamente mensal</strong>.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128196;</div>
+          <h3>Notas Fiscais</h3>
+          <p>Processamento <strong>manual</strong> via software <strong>Takeat</strong>.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128197;</div>
+          <h3>Card&aacute;pio</h3>
+          <p>Atualizado <strong>semanalmente</strong> (segundas). Particularidade: grade muda toda semana.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128176;</div>
+          <h3>Gest&atilde;o Financeira</h3>
+          <p>Opera&ccedil;&atilde;o <strong>fragmentada</strong>: Conta Azul + Excel + m&oacute;dulo Takeat.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Backoffice</div>
+      <div class="footer-right"><span class="page-num">6 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7 - DORES (CARDS) -->
+  <div class="slide slide-content" data-slide="7">
+    <div class="slide-header">
+      <h2>As dores que travam a efici&ecirc;ncia da Golburger</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cards-grid cols-3">
+        <div class="card">
+          <div class="card-icon">&#128424;</div>
+          <h3>Problemas com Impressoras</h3>
+          <p>Falhas recorrentes na configura&ccedil;&atilde;o e funcionamento das impressoras de cozinha.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128202;</div>
+          <h3>Relat&oacute;rios Insuficientes</h3>
+          <p>Dificuldade de extra&ccedil;&atilde;o de relat&oacute;rios gerenciais consolidados para tomada de decis&atilde;o.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128211;</div>
+          <h3>SPED Fiscal</h3>
+          <p>Severas limita&ccedil;&otilde;es para gera&ccedil;&atilde;o, valida&ccedil;&atilde;o e exporta&ccedil;&atilde;o do arquivo SPED Fiscal.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128260;</div>
+          <h3>Fluxo Fragmentado</h3>
+          <p>Gest&atilde;o financeira dispersa entre Conta Azul, Excel e Takeat sem integra&ccedil;&atilde;o.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128197;</div>
+          <h3>Card&aacute;pio Semanal</h3>
+          <p>Troca semanal de card&aacute;pio exige retaguarda &aacute;gil com sincroniza&ccedil;&atilde;o em tempo real.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">&#128683;</div>
+          <h3>Sem CRM</h3>
+          <p>Aus&ecirc;ncia de ferramentas para fideliza&ccedil;&atilde;o e relacionamento com clientes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Diagn&oacute;stico de Dores</div>
+      <div class="footer-right"><span class="page-num">7 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8 - DORES vs SOLUCOES (TABELA) -->
+  <div class="slide slide-content" data-slide="8">
+    <div class="slide-header">
+      <h2>As dores que travam a efici&ecirc;ncia da Golburger</h2>
+    </div>
+    <div class="slide-body">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Dores recorrentes</th>
+              <th>Como ajudamos</th>
+              <th>Benef&iacute;cio comercial</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Problemas com impressoras de cozinha</td>
+              <td>KDS com rota de impress&atilde;o integrada e suporte dedicado</td>
+              <td class="green-text">Redu&ccedil;&atilde;o de falhas e fluidez na produ&ccedil;&atilde;o</td>
+            </tr>
+            <tr>
+              <td>Relat&oacute;rios gerenciais insuficientes</td>
+              <td>BI com dashboards e atualiza&ccedil;&atilde;o peri&oacute;dica dos dados</td>
+              <td class="green-text">Decis&otilde;es mais r&aacute;pidas e embasadas</td>
+            </tr>
+            <tr>
+              <td>Limita&ccedil;&otilde;es no SPED Fiscal</td>
+              <td>Escritura&ccedil;&atilde;o fiscal automatizada e integrada</td>
+              <td class="green-text">Conformidade fiscal garantida</td>
+            </tr>
+            <tr>
+              <td>Gest&atilde;o financeira fragmentada</td>
+              <td>Ecossistema unificado (PDV + ERP + BI)</td>
+              <td class="green-text">Opera&ccedil;&atilde;o centralizada e menos retrabalho</td>
+            </tr>
+            <tr>
+              <td>Card&aacute;pio semanal sem agilidade</td>
+              <td>Gest&atilde;o centralizada com sincroniza&ccedil;&atilde;o em tempo real</td>
+              <td class="green-text">Agilidade na troca e zero erros</td>
+            </tr>
+            <tr>
+              <td>Aus&ecirc;ncia de CRM e fideliza&ccedil;&atilde;o</td>
+              <td>Ferramentas de fideliza&ccedil;&atilde;o integradas ao PDV</td>
+              <td class="green-text">Relacionamento com cliente e recorr&ecirc;ncia</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Dores vs. Solu&ccedil;&otilde;es</div>
+      <div class="footer-right"><span class="page-num">8 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9 - KPIs E METRICAS -->
+  <div class="slide slide-content" data-slide="9">
+    <div class="slide-header">
+      <h2>Dados que geram valor para a opera&ccedil;&atilde;o</h2>
+    </div>
+    <div class="slide-body">
+      <div class="kpi-grid">
+        <div class="kpi-box">
+          <h4>&#128200; Faturamento Segmentado</h4>
+          <div class="kpi-desc">Faturamento segregado por turno operacional e por canal de venda (Sal&atilde;o vs. Delivery).</div>
+        </div>
+        <div class="kpi-box">
+          <h4>&#127915; Ticket M&eacute;dio</h4>
+          <div class="kpi-desc">Ticket m&eacute;dio geral da loja e ticket m&eacute;dio espec&iacute;fico do canal Delivery.</div>
+        </div>
+        <div class="kpi-box">
+          <h4>&#128202; Curva ABC</h4>
+          <div class="kpi-desc">Ranking dos itens mais vendidos para direcionamento de card&aacute;pio e compras.</div>
+        </div>
+        <div class="kpi-box">
+          <h4>&#128176; CMV e Margem</h4>
+          <div class="kpi-desc">Custo de Mercadoria Vendida e margem de lucro real por produto.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; KPIs Obrigat&oacute;rios</div>
+      <div class="footer-right"><span class="page-num">9 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10 - COMPARACAO -->
+  <div class="slide slide-content" data-slide="10">
+    <div class="slide-header">
+      <h2>Por que evoluir da opera&ccedil;&atilde;o atual para a 3S?</h2>
+    </div>
+    <div class="slide-body">
+      <div class="comparison-container">
+        <div class="comparison-col current">
+          <h3>&#128308; Opera&ccedil;&atilde;o Atual (Takeat)</h3>
+          <ul>
+            <li>Foco apenas na gest&atilde;o administrativa b&aacute;sica</li>
+            <li>Dados para consulta, sem intelig&ecirc;ncia embarcada</li>
+            <li>Impress&atilde;o na produ&ccedil;&atilde;o com falhas recorrentes</li>
+            <li>M&uacute;ltiplos pontos de gest&atilde;o (Conta Azul + Excel + Takeat)</li>
+            <li>Acompanhamento reativo, sem tempo real</li>
+            <li>Limita&ccedil;&otilde;es severas no SPED Fiscal</li>
+            <li>Sem CRM ou ferramentas de fideliza&ccedil;&atilde;o</li>
+          </ul>
+        </div>
+        <div class="comparison-col new">
+          <h3>&#128994; 3S Checkout</h3>
+          <ul>
+            <li>Gest&atilde;o administrativa e operacional integrada</li>
+            <li>Dados para tomada de decis&atilde;o com BI executivo</li>
+            <li>KDS com indicadores operacionais e rota de impress&atilde;o</li>
+            <li>Opera&ccedil;&atilde;o centralizada em um ecossistema &uacute;nico</li>
+            <li>Visibilidade em tempo real com 3S Go</li>
+            <li>Escritura&ccedil;&atilde;o fiscal automatizada (SPED)</li>
+            <li>Sincroniza&ccedil;&atilde;o de card&aacute;pio &aacute;gil para troca semanal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Comparativo</div>
+      <div class="footer-right"><span class="page-num">10 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11 - DIRECIONAMENTO ESTRATEGICO -->
+  <div class="slide slide-content" data-slide="11">
+    <div class="slide-header">
+      <h2>Direcionamento Estrat&eacute;gico</h2>
+    </div>
+    <div class="slide-body">
+      <div class="direcionamento-box">
+        <h3>&#128161; Foco Principal para a Golburger</h3>
+        <div class="direcionamento-list">
+          <div class="direcionamento-item">
+            <div class="num">1</div>
+            <p><strong>Substituir o fluxo fragmentado</strong> (Excel + Conta Azul + Takeat) por um ecossistema integrado que unifique financeiro, estoque e opera&ccedil;&atilde;o.</p>
+          </div>
+          <div class="direcionamento-item">
+            <div class="num">2</div>
+            <p><strong>Automatizar a escritura&ccedil;&atilde;o fiscal</strong> (SPED), eliminando limita&ccedil;&otilde;es atuais e garantindo conformidade tribut&aacute;ria.</p>
+          </div>
+          <div class="direcionamento-item">
+            <div class="num">3</div>
+            <p><strong>Unificar o controle de estoque</strong> com vis&atilde;o centralizada do CMV e margem por produto.</p>
+          </div>
+          <div class="direcionamento-item">
+            <div class="num">4</div>
+            <p><strong>Garantir retaguarda &aacute;gil</strong> para sincroniza&ccedil;&atilde;o em tempo real do card&aacute;pio semanal.</p>
+          </div>
+          <div class="direcionamento-item">
+            <div class="num">5</div>
+            <p><strong>Implementar BI e dashboards</strong> com indicadores de faturamento por turno/canal, ticket m&eacute;dio, Curva ABC e CMV.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Direcionamento</div>
+      <div class="footer-right"><span class="page-num">11 / 12</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12 - PROPOSTA COMERCIAL -->
+  <div class="slide slide-content" data-slide="12">
+    <div class="slide-header">
+      <h2>Proposta Golburger</h2>
+    </div>
+    <div class="slide-body">
+      <div class="proposta-container">
+        <div class="proposta-left">
+          <h4>Condi&ccedil;&otilde;es Comerciais</h4>
+          <table>
+            <tr>
+              <td>Tempo de contrato</td>
+              <td>36 meses</td>
+            </tr>
+            <tr>
+              <td>Qtd unidades/lojas</td>
+              <td>1 loja</td>
+            </tr>
+            <tr>
+              <td>Instala&ccedil;&atilde;o por loja</td>
+              <td><span class="price-old">R$ 1.622,00</span> <span class="price-free">Isento</span></td>
+            </tr>
+            <tr>
+              <td>Setup / Cadastro</td>
+              <td><span class="price-old">R$ 3.000,00</span> <span class="price-free">Isento</span></td>
+            </tr>
+            <tr>
+              <td>PDV &mdash; At&eacute; 3</td>
+              <td>R$ 350,00</td>
+            </tr>
+            <tr>
+              <td>KDS &mdash; At&eacute; 3</td>
+              <td>R$ 160,00</td>
+            </tr>
+            <tr>
+              <td>Impressoras &mdash; Ilimitado</td>
+              <td>R$ 100,00</td>
+            </tr>
+            <tr>
+              <td>Integra&ccedil;&atilde;o iFood</td>
+              <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
+            </tr>
+            <tr>
+              <td>TEF &mdash; 1&ordf; integra&ccedil;&atilde;o</td>
+              <td>R$ 104,20</td>
+            </tr>
+            <tr>
+              <td>3S Go</td>
+              <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
+            </tr>
+            <tr>
+              <td>3S BI &mdash; Simples</td>
+              <td>R$ 120,00</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total mensalidade</td>
+              <td>R$ 834,20</td>
+            </tr>
+          </table>
+        </div>
+        <div class="proposta-right">
+          <div class="servicos-box">
+            <h4>&#128230; Servi&ccedil;os Inclu&iacute;dos na Mensalidade</h4>
+            <ul>
+              <li>&#10003; PDV at&eacute; 3 terminais</li>
+              <li>&#10003; KDS at&eacute; 3 telas com indicadores operacionais</li>
+              <li>&#10003; Rota de impress&atilde;o ilimitada (6 impressoras)</li>
+              <li>&#10003; Integra&ccedil;&atilde;o marketplace iFood (isento)</li>
+              <li>&#10003; TEF integrado (GETNET)</li>
+              <li>&#10003; App 3S Go (isento)</li>
+              <li>&#10003; 3S BI &mdash; Dashboards executivos</li>
+              <li>&#10003; Escritura&ccedil;&atilde;o fiscal automatizada (SPED)</li>
+              <li>&#10003; Gest&atilde;o centralizada de card&aacute;pio</li>
+            </ul>
+          </div>
+          <div class="highlights-box">
+            <h4>&#11088; Highlights</h4>
+            <ul>
+              <li>&#10003; Instala&ccedil;&atilde;o isenta: saving de R$ 1.622</li>
+              <li>&#10003; Setup/Cadastro isento: saving de R$ 3.000</li>
+              <li>&#10003; Integra&ccedil;&atilde;o iFood isenta</li>
+              <li>&#10003; 3S Go isento</li>
+              <li>&#10003; <strong>Saving total: R$ 4.742,00</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-left">3S Checkout &bull; Golburger &bull; Proposta Comercial</div>
+      <div class="footer-right"><span class="page-num">12 / 12</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CONTROLES -->
+<div class="controls">
+  <button id="prevBtn" onclick="changeSlide(-1)" disabled>&larr; Anterior</button>
+  <span class="slide-counter" id="slideCounter">1 / 12</span>
+  <button id="nextBtn" onclick="changeSlide(1)">Pr&oacute;ximo &rarr;</button>
+</div>
+
+<script>
+let currentSlide = 1;
+const totalSlides = 12;
+
+function changeSlide(dir) {
+  const next = currentSlide + dir;
+  if (next < 1 || next > totalSlides) return;
+  goToSlide(next);
+}
+
+function goToSlide(n) {
+  document.querySelector('.slide.active').classList.remove('active');
+  currentSlide = n;
+  document.querySelector('[data-slide="' + n + '"]').classList.add('active');
+  document.getElementById('slideCounter').textContent = n + ' / ' + totalSlides;
+  document.getElementById('prevBtn').disabled = (n === 1);
+  document.getElementById('nextBtn').disabled = (n === totalSlides);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    e.preventDefault();
+    changeSlide(1);
+  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    changeSlide(-1);
+  } else if (e.key === 'Home') {
+    e.preventDefault();
+    goToSlide(1);
+  } else if (e.key === 'End') {
+    e.preventDefault();
+    goToSlide(totalSlides);
+  }
+});
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+</script>
+
+</body>
+</html>
