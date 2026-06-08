@@ -417,104 +417,128 @@ body {
 }
 
 /* Proposta slide */
-.proposta-container {
+.proposta-full {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
   flex: 1;
 }
 
-.proposta-left {
-  background: var(--white);
-  border-radius: 8px;
-  padding: 16px;
-  border: 1px solid var(--gray-border);
+.proposta-tables {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
-.proposta-left h4 {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--red-dark);
-  margin-bottom: 10px;
+.proposta-section {
+  background: var(--white);
+  border-radius: 6px;
+  padding: 10px 14px;
+  border: 1px solid var(--gray-border);
 }
 
-.proposta-left table {
+.proposta-section h4 {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--white);
+  background: var(--red-dark);
+  margin: -10px -14px 8px;
+  padding: 6px 14px;
+  border-radius: 6px 6px 0 0;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.proposta-section.servicos h4 {
+  background: #3a3a3a;
+}
+
+.proposta-section.adicionais h4 {
+  background: var(--purple-accent);
+}
+
+.proposta-section table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.proposta-left table td {
-  padding: 5px 8px;
-  font-size: 9.5px;
+.proposta-section table td {
+  padding: 3.5px 6px;
+  font-size: 9px;
   color: var(--black);
   border-bottom: 1px solid #eee;
 }
 
-.proposta-left table td:first-child {
+.proposta-section table td:first-child {
   font-weight: 600;
-  width: 60%;
+  width: 55%;
 }
 
-.proposta-left table td:last-child {
+.proposta-section table td:nth-child(2) {
+  text-align: center;
+  font-size: 8px;
+  color: var(--gray-text);
+  width: 18%;
+}
+
+.proposta-section table td:last-child {
   text-align: right;
   font-weight: 500;
 }
 
-.proposta-left .total-row td {
+.proposta-section .total-row td {
   border-top: 2px solid var(--red-primary);
   font-weight: 800 !important;
-  font-size: 11px !important;
+  font-size: 10px !important;
   color: var(--red-dark) !important;
-  padding-top: 8px;
+  padding-top: 6px;
+  border-bottom: none;
 }
 
-.proposta-right {
+.proposta-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.proposta-right .servicos-box {
+.proposta-sidebar .info-box {
   background: rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 14px 16px;
-  flex: 1;
+  border-radius: 6px;
+  padding: 10px 12px;
 }
 
-.proposta-right .servicos-box h4 {
-  font-size: 11px;
+.proposta-sidebar .info-box h4 {
+  font-size: 10px;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 8px;
-}
-
-.proposta-right .servicos-box li {
-  font-size: 9px;
-  color: var(--white);
-  padding: 2px 0;
-  line-height: 1.4;
-}
-
-.proposta-right .highlights-box {
-  background: var(--green-light-bg);
-  border-radius: 8px;
-  padding: 14px 16px;
-}
-
-.proposta-right .highlights-box h4 {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--green-highlight);
   margin-bottom: 6px;
 }
 
-.proposta-right .highlights-box li {
-  font-size: 9px;
+.proposta-sidebar .info-box li {
+  font-size: 8.5px;
+  color: var(--white);
+  padding: 1.5px 0;
+  line-height: 1.35;
+}
+
+.proposta-sidebar .highlights-box {
+  background: var(--green-light-bg);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.proposta-sidebar .highlights-box h4 {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--green-highlight);
+  margin-bottom: 5px;
+}
+
+.proposta-sidebar .highlights-box li {
+  font-size: 8.5px;
   color: var(--black);
-  padding: 2px 0;
-  line-height: 1.4;
+  padding: 1.5px 0;
+  line-height: 1.35;
 }
 
 /* Footer */
@@ -1022,82 +1046,99 @@ body {
       <h2>Proposta Golburger</h2>
     </div>
     <div class="slide-body">
-      <div class="proposta-container">
-        <div class="proposta-left">
-          <h4>Condi&ccedil;&otilde;es Comerciais</h4>
-          <table>
-            <tr>
-              <td>Tempo de contrato</td>
-              <td>36 meses</td>
-            </tr>
-            <tr>
-              <td>Qtd unidades/lojas</td>
-              <td>1 loja</td>
-            </tr>
-            <tr>
-              <td>Instala&ccedil;&atilde;o por loja</td>
-              <td><span class="price-old">R$ 1.622,00</span> <span class="price-free">Isento</span></td>
-            </tr>
-            <tr>
-              <td>Setup / Cadastro</td>
-              <td><span class="price-old">R$ 3.000,00</span> <span class="price-free">Isento</span></td>
-            </tr>
-            <tr>
-              <td>PDV &mdash; At&eacute; 3</td>
-              <td>R$ 350,00</td>
-            </tr>
-            <tr>
-              <td>KDS &mdash; At&eacute; 3</td>
-              <td>R$ 160,00</td>
-            </tr>
-            <tr>
-              <td>Impressoras &mdash; Ilimitado</td>
-              <td>R$ 100,00</td>
-            </tr>
-            <tr>
-              <td>Integra&ccedil;&atilde;o iFood</td>
-              <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
-            </tr>
-            <tr>
-              <td>TEF &mdash; 1&ordf; integra&ccedil;&atilde;o</td>
-              <td>R$ 104,20</td>
-            </tr>
-            <tr>
-              <td>3S Go</td>
-              <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
-            </tr>
-            <tr>
-              <td>3S BI &mdash; Simples</td>
-              <td>R$ 120,00</td>
-            </tr>
-            <tr class="total-row">
-              <td>Total mensalidade</td>
-              <td>R$ 834,20</td>
-            </tr>
-          </table>
+      <div class="proposta-full">
+        <div class="proposta-tables">
+
+          <!-- INSTALACAO / SETUP -->
+          <div class="proposta-section">
+            <h4>Instala&ccedil;&atilde;o / Setup</h4>
+            <table>
+              <tr>
+                <td>Instala&ccedil;&atilde;o por loja</td>
+                <td>&Uacute;nico</td>
+                <td><span class="price-old">R$ 1.622,00</span> <span class="price-free">Isento</span></td>
+              </tr>
+              <tr>
+                <td>Setup / Cadastro</td>
+                <td>&Uacute;nico</td>
+                <td><span class="price-old">R$ 3.000,00</span> <span class="price-free">Isento</span></td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- SERVICOS -->
+          <div class="proposta-section servicos">
+            <h4>Servi&ccedil;os</h4>
+            <table>
+              <tr>
+                <td>PDV &mdash; At&eacute; 3</td>
+                <td>Mensal</td>
+                <td>R$ 350,00</td>
+              </tr>
+              <tr>
+                <td>KDS &mdash; At&eacute; 3</td>
+                <td>Mensal</td>
+                <td>R$ 160,00</td>
+              </tr>
+              <tr>
+                <td>Impressoras &mdash; Ilimitado</td>
+                <td>Mensal</td>
+                <td>R$ 100,00</td>
+              </tr>
+              <tr>
+                <td>Integra&ccedil;&atilde;o Marketplace &mdash; iFood</td>
+                <td>Mensal</td>
+                <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
+              </tr>
+              <tr>
+                <td>TEF &mdash; 1&ordf; integra&ccedil;&atilde;o</td>
+                <td>Mensal</td>
+                <td>R$ 104,20</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- SERVICOS ADICIONAIS -->
+          <div class="proposta-section adicionais">
+            <h4>Servi&ccedil;os Adicionais</h4>
+            <table>
+              <tr>
+                <td>3S Go &mdash; Ilimitado por loja</td>
+                <td>Mensal</td>
+                <td><span class="price-old">R$ 60,00</span> <span class="price-free">Isento</span></td>
+              </tr>
+              <tr>
+                <td>3S BI &mdash; Simples</td>
+                <td>Mensal</td>
+                <td>R$ 120,00</td>
+              </tr>
+              <tr class="total-row">
+                <td>Total mensalidade</td>
+                <td></td>
+                <td>R$ 834,20</td>
+              </tr>
+            </table>
+          </div>
+
         </div>
-        <div class="proposta-right">
-          <div class="servicos-box">
-            <h4>&#128230; Servi&ccedil;os Inclu&iacute;dos na Mensalidade</h4>
+        <div class="proposta-sidebar">
+          <div class="info-box">
+            <h4>&#128203; Condi&ccedil;&otilde;es Gerais</h4>
             <ul>
-              <li>&#10003; PDV at&eacute; 3 terminais</li>
-              <li>&#10003; KDS at&eacute; 3 telas com indicadores operacionais</li>
-              <li>&#10003; Rota de impress&atilde;o ilimitada (6 impressoras)</li>
-              <li>&#10003; Integra&ccedil;&atilde;o marketplace iFood (isento)</li>
-              <li>&#10003; TEF integrado (GETNET)</li>
-              <li>&#10003; App 3S Go (isento)</li>
-              <li>&#10003; 3S BI &mdash; Dashboards executivos</li>
-              <li>&#10003; Escritura&ccedil;&atilde;o fiscal automatizada (SPED)</li>
+              <li>&#10003; Contrato: <strong>36 meses</strong></li>
+              <li>&#10003; Unidades: <strong>1 loja</strong></li>
+              <li>&#10003; Escritura&ccedil;&atilde;o fiscal (SPED) inclusa</li>
               <li>&#10003; Gest&atilde;o centralizada de card&aacute;pio</li>
+              <li>&#10003; Suporte t&eacute;cnico dedicado</li>
             </ul>
           </div>
           <div class="highlights-box">
             <h4>&#11088; Highlights</h4>
             <ul>
-              <li>&#10003; Instala&ccedil;&atilde;o isenta: saving de R$ 1.622</li>
-              <li>&#10003; Setup/Cadastro isento: saving de R$ 3.000</li>
-              <li>&#10003; Integra&ccedil;&atilde;o iFood isenta</li>
-              <li>&#10003; 3S Go isento</li>
+              <li>&#10003; Instala&ccedil;&atilde;o isenta: <strong>R$ 1.622</strong></li>
+              <li>&#10003; Setup isento: <strong>R$ 3.000</strong></li>
+              <li>&#10003; iFood isento: <strong>R$ 60</strong></li>
+              <li>&#10003; 3S Go isento: <strong>R$ 60</strong></li>
               <li>&#10003; <strong>Saving total: R$ 4.742,00</strong></li>
             </ul>
           </div>
@@ -1132,37 +1173,4 @@ function changeSlide(dir) {
 function goToSlide(n) {
   document.querySelector('.slide.active').classList.remove('active');
   currentSlide = n;
-  document.querySelector('[data-slide="' + n + '"]').classList.add('active');
-  document.getElementById('slideCounter').textContent = n + ' / ' + totalSlides;
-  document.getElementById('prevBtn').disabled = (n === 1);
-  document.getElementById('nextBtn').disabled = (n === totalSlides);
-}
-
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
-    e.preventDefault();
-    changeSlide(1);
-  } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-    e.preventDefault();
-    changeSlide(-1);
-  } else if (e.key === 'Home') {
-    e.preventDefault();
-    goToSlide(1);
-  } else if (e.key === 'End') {
-    e.preventDefault();
-    goToSlide(totalSlides);
-  }
-});
-
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    document.exitFullscreen();
-  }
-}
-</script>
-
-</body>
-</html>
+  document.querySelector('[data-slide="' + n + '
